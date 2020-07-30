@@ -1,8 +1,7 @@
 /* gakshintala created on 4/12/20 */
 package app.imperative
 
-import app.domain.Egg
-import app.domain.Yolk
+import app.domain.*
 import app.domain.validation.ValidationFailure
 import app.domain.validation.ValidationFailures
 
@@ -12,7 +11,7 @@ fun validate1(
     iterator: MutableIterator<Egg?>,
     eggToBeValidated: Egg?
 ): Boolean {
-    if (!simpleOperation1(eggToBeValidated)) {
+    if (!simpleRule(eggToBeValidated)) {
         iterator.remove()
         badEggFailureBucketMap[eggIndex] = ValidationFailures.NO_EGG_TO_VALIDATE_1
         return false
@@ -28,7 +27,7 @@ fun validate2(
     eggToBeValidated: Egg?
 ): Boolean {
     try {
-        if (!throwableOperation2(eggToBeValidated!!)) {
+        if (!throwableRule2(eggToBeValidated!!)) {
             iterator.remove()
             badEggFailureBucketMap[eggIndex] = ValidationFailures.TOO_LATE_TO_HATCH_2
             return false
@@ -49,7 +48,7 @@ fun validateParent3(
     eggToBeValidated: Egg
 ): Boolean {
     try {
-        if (throwableOperation3(eggToBeValidated)) {
+        if (throwableRule3(eggToBeValidated)) {
             val yolkTobeValidated = eggToBeValidated.yolk
             if (!validateChild31(
                     badEggFailureBucketMap,
@@ -90,7 +89,7 @@ fun validateChild31(
     yolkTobeValidated: Yolk?
 ): Boolean {
     try {
-        if (!throwableNestedOperation(yolkTobeValidated)) {
+        if (!throwableNestedRule(yolkTobeValidated)) {
             iterator.remove()
             badEggFailureBucketMap[eggIndex] = ValidationFailures.YOLK_IS_IN_WRONG_COLOR_C_3
             return false
@@ -111,7 +110,7 @@ fun validateChild32(
     yolkTobeValidated: Yolk?
 ): Boolean {
     try {
-        if (!throwableNestedOperation(yolkTobeValidated)) {
+        if (!throwableNestedRule(yolkTobeValidated)) {
             iterator.remove()
             badEggFailureBucketMap[eggIndex] = ValidationFailures.YOLK_IS_IN_WRONG_COLOR_C_3
             return false
@@ -151,7 +150,7 @@ fun validateChild4(
     }
     val yolkTobeValidated = eggToBeValidated.yolk
     try {
-        if (!throwableNestedOperation(yolkTobeValidated)) {
+        if (!throwableNestedRule(yolkTobeValidated)) {
             iterator.remove()
             badEggFailureBucketMap[eggIndex] = ValidationFailures.YOLK_IS_IN_WRONG_COLOR_C_3
             return false
@@ -172,7 +171,7 @@ fun validateParent41(
     eggToBeValidated: Egg?
 ): Boolean {
     try {
-        if (!throwableOperation3(eggToBeValidated!!)) {
+        if (!throwableRule3(eggToBeValidated!!)) {
             iterator.remove()
             badEggFailureBucketMap[eggIndex] = ValidationFailures.ABOUT_TO_HATCH_P_3
             return false
@@ -193,7 +192,7 @@ fun validateParent42(
     eggToBeValidated: Egg?
 ): Boolean {
     try {
-        if (!throwableOperation3(eggToBeValidated!!)) {
+        if (!throwableRule3(eggToBeValidated!!)) {
             iterator.remove()
             badEggFailureBucketMap[eggIndex] = ValidationFailures.ABOUT_TO_HATCH_P_3
             return false
